@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"nujabse.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="&amp;emsp;这是我的第一篇使用hexo + markdown写成的博文。这个博客主要用来记录关于计算机的个人心得，如有侵权不足请指正。以下为 Q &amp; A环节 Q &amp; A：Why write blogs？Wikipedia 上关于blog的介绍是这样的：  博客（英语：Blog，为Web Log的混成词），意指log on the web意即在网络上纪录，是一种由个人管理、张贴新的文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A first hello">
+<meta property="og:url" content="https://nujabse.github.io/2016/12/26/A%20first%20hello/index.html">
+<meta property="og:site_name" content="Graphophobia">
+<meta property="og:description" content="&amp;emsp;这是我的第一篇使用hexo + markdown写成的博文。这个博客主要用来记录关于计算机的个人心得，如有侵权不足请指正。以下为 Q &amp; A环节 Q &amp; A：Why write blogs？Wikipedia 上关于blog的介绍是这样的：  博客（英语：Blog，为Web Log的混成词），意指log on the web意即在网络上纪录，是一种由个人管理、张贴新的文">
+<meta property="og:image" content="http://oj1ify5rd.bkt.clouddn.com/static/images/markdown-bold-italic.gif">
+<meta property="og:image" content="http://oj1ify5rd.bkt.clouddn.com/static/images/markdown-quote.gif">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/5492542/15363504/839753be-1d4b-11e6-9ac8-def4d7122e8d.gif">
+<meta property="og:image" content="http://oj1ify5rd.bkt.clouddn.com/static/images/emacs-markdown.png">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/bd120474gw1fbclgvfcpeg20np0dcqv6.gif">
+<meta property="og:image" content="https://octodex.github.com/images/yaktocat.png">
+<meta property="og:image" content="http://oj1ify5rd.bkt.clouddn.com/static/images/weibo-pictures.png">
+<meta property="article:published_time" content="2016-12-26T14:49:56.000Z">
+<meta property="article:modified_time" content="2020-07-19T15:54:27.801Z">
+<meta property="article:author" content="Nujabse">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="vim">
+<meta property="article:tag" content="emacs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oj1ify5rd.bkt.clouddn.com/static/images/markdown-bold-italic.gif">
+
+<link rel="canonical" href="https://nujabse.github.io/2016/12/26/A%20first%20hello/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>A first hello | Graphophobia</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Graphophobia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://nujabse.github.io/2016/12/26/A%20first%20hello/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Nujabse">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Graphophobia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          A first hello
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-12-26 22:49:56" itemprop="dateCreated datePublished" datetime="2016-12-26T22:49:56+08:00">2016-12-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-19 23:54:27" itemprop="dateModified" datetime="2020-07-19T23:54:27+08:00">2020-07-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/utility/" itemprop="url" rel="index"><span itemprop="name">utility</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&emsp;这是我的第一篇使用hexo + markdown写成的博文。这个博客主要用来记录关于计算机的个人心得，如有侵权不足请指正。以下为 Q &amp; A环节</p>
+<h2 id="Q-amp-A："><a href="#Q-amp-A：" class="headerlink" title="Q &amp; A："></a>Q &amp; A：</h2><h3 id="Why-write-blogs？"><a href="#Why-write-blogs？" class="headerlink" title="Why write blogs？"></a>Why write blogs？</h3><p>Wikipedia 上关于blog的介绍是这样的：</p>
+<blockquote>
+<p>博客（英语：Blog，为Web Log的混成词），意指log on the web意即在网络上纪录，是一种由个人管理、张贴新的文章、图片或视频的网站或在线日记，用来纪录、抒发情感或分享信息。博客上的文章通常根据张贴时间（Chronological Order），以倒序方式由新到旧排列。</p>
+</blockquote>
+<p>我写博客的初衷在于系统总结经验知识和共享。一直订阅<a href="http://calnewport.com/blog/" target="_blank" rel="noopener">Study Hacks Blog</a>，作者写的很多博文都给予了我很大的启发。同时，我在应用他的一些方法的时候，意识到光是碎片化的知识收集是不够的（如各种笔记软件），最终还是要用自己的大脑和语言组织知识之间的联系。Blog作为一种电子日志工具，具备可搜索性和完善的标签分类系统，同时容易二次编辑整理，且易于分享，因而成为了我的选择。</p>
+<a id="more"></a> 
+<h3 id="什么是markdown？"><a href="#什么是markdown？" class="headerlink" title="什么是markdown？"></a>什么是markdown？</h3><p>关于markdown的定义，Wikipedia 上面是这样写的</p>
+<blockquote>
+<p>Markdown 是一种轻量级标记语言，创始人为約翰·格魯伯（John Gruber）。它允许人们<br>使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档。这种<br>语言吸收了很多在电子邮件中已有的纯文本标记的特性。</p>
+</blockquote>
+<p>Github的官方介绍markdown的页面 <a href="https://guides.github.com/features/mastering-markdown/" target="_blank" rel="noopener">Mastering Markdown</a> 上面则是这样说的:</p>
+<blockquote>
+<p>Markdown is a way to style text on the web. You control the display of the document; formatting words as bold or italic, adding images, and creating lists are just a few of the things we can do with Markdown. Mostly, Markdown is just regular text with a few non-alphabetic characters thrown in, like # or * .  </p>
+</blockquote>
+<p>下面用一组动态图来演示使用markdown的两个简单例子（编辑工具：atom+markdown-preview插件)：</p>
+<ul>
+<li><p>设置文字加粗和斜体</p>
+<p>It’s vey easy to make some words <strong>bold</strong> and other words <em>italic</em> with Markdown. <img src="http://oj1ify5rd.bkt.clouddn.com/static/images/markdown-bold-italic.gif"></p>
+</li>
+</ul>
+<ul>
+<li><p>文本引用</p>
+<p>As Kanye West said:</p>
+<blockquote>
+<p>we are living the future,<br>so the present is our past.</p>
+</blockquote>
+<p><img src="http://oj1ify5rd.bkt.clouddn.com/static/images/markdown-quote.gif"></p>
+</li>
+</ul>
+<h3 id="为什么使用markdown-写博客？"><a href="#为什么使用markdown-写博客？" class="headerlink" title="为什么使用markdown 写博客？"></a>为什么使用<code>markdown</code> 写博客？</h3><p>在我这三天的连续使用摸索看来，使用markdown写作有以下这些好处：</p>
+<h4 id="markdown-是一种标记式语言。"><a href="#markdown-是一种标记式语言。" class="headerlink" title="markdown 是一种标记式语言。"></a>markdown 是一种<code>标记式</code>语言。</h4><p>  上手markdown非常容易，在记住几个基本的格式记号之后，你就可以完全不 用管最终格式问题，而只需要专注于文章的内容，页面排版渲染则交给css负责，实现排版与内容相脱离，可以称得上是“穷人版的LaTeX”。</p>
+<h4 id="类似于org-mode-的大纲模式"><a href="#类似于org-mode-的大纲模式" class="headerlink" title="类似于org-mode 的大纲模式"></a>类似于org-mode 的<code>大纲模式</code></h4><p>习惯了使用org-mode做gtd之后，我写作之前都习惯列出大的提纲和二级或者更低级标题，在必要的标题之下列出清单，然后再一步一步完善各级标题，而不是追求之前的一气呵成，从而避免了完美主义带来的拖延症，同时标题的次序权级可以很方便地调整，使得内容也更加有逻辑性。将日常中想到的要点用Google Keep随身记录在TODO list里面，然后使用markdown的大纲慢慢完善，我认为这样的一套工具效率很高，而且distraction-free.</p>
+<h4 id="足够轻量"><a href="#足够轻量" class="headerlink" title="足够轻量"></a>足够<code>轻量</code></h4><p>使用者并不需要额外的编程语言基础或者弄懂HTML语言的细节，只需要掌握基本的几个用法就可以使用大部分的功能。另外也不需要配置语言环境，很多在线网站如简书，github之类的可以做到即时预览。</p>
+<h4 id="纯文本格式，编辑工具多、跨平台。"><a href="#纯文本格式，编辑工具多、跨平台。" class="headerlink" title="纯文本格式，编辑工具多、跨平台。"></a>纯文本格式，编辑工具多、跨平台。</h4><p>不同于Word 的docx格式，markdown文档是纯文本格式的，也就意味着你并不会担心类似于word 2003/2010/2016 创建的文档打开或者编辑的效果不同的问题，同时也不存在wps打开word文档不兼容的情况。你完全可以使用你喜爱的编辑器编辑md文档而不用担心无法打开或者windows下创建的文档Linux下无法继续编辑。因此markdown文档的编辑器有很多，小到windows自带的记事本，大到重型IDE都可以。下面是几个不同编辑器的例子：</p>
+<ul>
+<li><p>Vim：vim安装插件之后，可以做到一遍用vim写md，一边同步调用chrome查看渲染效果，做到”所写即所见“ <img src="https://cloud.githubusercontent.com/assets/5492542/15363504/839753be-1d4b-11e6-9ac8-def4d7122e8d.gif" alt="vim-instant-markdown"></p>
+<p>具体的安装使用方法见项目主页 <a href="https://github.com/iamcco/markdown-preview.vim" target="_blank" rel="noopener">markdown-preview.vim</a></p>
+</li>
+<li><p>Emacs： Spacemacs配置好markdown layer之后，语法高亮很漂亮<img src="http://oj1ify5rd.bkt.clouddn.com/static/images/emacs-markdown.png"></p>
+</li>
+<li><p>Atom: 我安装的插件是markdown-scroll-sync + markdown-writer 实现同步滚动预览<img src="http://ww3.sinaimg.cn/large/bd120474gw1fbclgvfcpeg20np0dcqv6.gif"></p>
+</li>
+<li><p>vi, nano, etc</p>
+</li>
+</ul>
+<h3 id="说了这么多优点，有哪些坑？"><a href="#说了这么多优点，有哪些坑？" class="headerlink" title="说了这么多优点，有哪些坑？"></a>说了这么多优点，有哪些坑？</h3><h4 id="markdown-有很多变体flavour"><a href="#markdown-有很多变体flavour" class="headerlink" title="markdown 有很多变体flavour."></a>markdown 有很多变体flavour.</h4><p>引用一个github项目整理的Markdown Flavours 列表：</p>
+<blockquote>
+<p>A list of Markdown flavors in alphabetical order.</p>
+</blockquote>
+<ul>
+<li>CriticMarkup</li>
+<li>Discount</li>
+<li>Ghost’s Markdown/Haunted Markdown</li>
+<li>GitHub Flavored Markdown</li>
+<li>GitLab Flavored Markdown (with login)</li>
+<li>Haroopad Flavored Markdown</li>
+<li>iA Writer’s Markdown</li>
+<li>Kramdown</li>
+<li>Leanpub Flavored Markdown</li>
+<li>Litedown</li>
+<li>Lunamark</li>
+<li>Madoko</li>
+<li>Markdown</li>
+<li>Markdown 2</li>
+<li>Markdown Extra</li>
+<li>Markdown-it</li>
+<li>Markua</li>
+</ul>
+<p>不同的Flavour意味着markdown的语法在不同的编辑平台上可能会有细微的差别</p>
+<h4 id="markdown-并不能很方便地编辑表格或者复杂的流程图"><a href="#markdown-并不能很方便地编辑表格或者复杂的流程图" class="headerlink" title="markdown 并不能很方便地编辑表格或者复杂的流程图"></a>markdown 并不能很方便地编辑表格或者复杂的流程图</h4><p>markdown 还是更适合文字较多的语境，对于有需要各种流程图加可视化数据展示的，还是老老实实地使用word嵌套excel表格吧。</p>
+<h3 id="Why-hexo？"><a href="#Why-hexo？" class="headerlink" title="Why hexo？"></a>Why hexo？</h3><p>Hexo 是一个基于Node.js开发的博客框架，引用<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="noopener">“不如”</a>的博文简绍：</p>
+<blockquote>
+<p>hexo出自台湾大学生tommy351之手，是一个基于Node.js的静态博客程序，其编译上百篇文字只需要几秒。hexo生成的静态网页可以直接放到GitHub Pages，BAE，SAE等平台上。</p>
+</blockquote>
+<p>由于hexo社区有相当多的中文用户，因此使用hexo写博客有如下好处：</p>
+<h4 id="hexo-容易部署，插件多"><a href="#hexo-容易部署，插件多" class="headerlink" title="hexo 容易部署，插件多"></a>hexo 容易部署，插件多</h4><p>使用npm 可以很方便地安装各种插件，我目前用到的有两个</p>
+<ul>
+<li><p>hexo-qiniu-sync: 参考项目主页<a href="https://github.com/gyk001/hexo-qiniu-sync" target="_blank" rel="noopener">Hexo七牛同步插件</a>，在hexo主目录下运行命令安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-qiniu-sync --save</span><br></pre></td></tr></table></figure>
+<p>  添加插件配置信息到_config.yml 文件中，在这里需要注意，与官方的README.md文档不同，你需要<strong>注释</strong>掉最初的两行：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plugins：</span><br><span class="line"> — hexo-qiniu-sync</span><br></pre></td></tr></table></figure>
+
+<p>  否则会覆盖掉hexo 本身的 hexo server  命令</p>
+</li>
+<li><p><a href="https://github.com/hexojs/hexo-deployer-git" target="_blank" rel="noopener">hexo-deployer-git</a>： 在hexo主目录下执行命令安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>配置好git用户名设置，ssh-key 就可以实现hexo d 一键部署到github</p>
+</li>
+</ul>
+<h4 id="主题丰富"><a href="#主题丰富" class="headerlink" title="主题丰富"></a>主题丰富</h4><p>我的博客使用的是github上star数比较多的 <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">hexo-theme-next</a>, 主题的作者也写过一个关于git的在线教程网页：<a href="http://iissnan.com/progit/" target="_blank" rel="noopener">Pro Git</a>, 值得一看。安装主题很简单，<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">官方文档</a>里有详细说明，这里扼要介绍一下：</p>
+<ul>
+<li><p>下载主题. 在hexo主目录下打开终端，使用git checkout 代码:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> your-hexo-site</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启用配置主题. 编辑hexo主目录下的站点配置文件_config.yml , 查找theme字段并设置为next</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Themes: https:&#x2F;&#x2F;hexo.io&#x2F;themes&#x2F;</span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+
+<p> 配置站点语言</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> # Site</span><br><span class="line">language: zh-Hans</span><br><span class="line">timezone: Asia&#x2F;Shanghai</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="社区大"><a href="#社区大" class="headerlink" title="社区大"></a>社区大</h4><p>有什么问题一般都可以google解决或者是在github上搜索有无相似的issue.</p>
+<h3 id="怎样插入图片？"><a href="#怎样插入图片？" class="headerlink" title="怎样插入图片？"></a>怎样插入图片？</h3><p>markdown插入图片的语法的一个例子是</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">Image of Yaktocat</span>](<span class="link">https://octodex.github.com/images/yaktocat.png</span>)</span><br></pre></td></tr></table></figure>
+<p>最终的效果是<img src="https://octodex.github.com/images/yaktocat.png" alt="Image of Yaktocat"></p>
+<p>由于github上的免费账户有存储空间限制，我选择了使用图床插入图片。</p>
+<ul>
+<li><p>选择图床</p>
+<ol>
+<li><p>七牛 <a href="https://github.com/gyk001/hexo-qiniu-sync" target="_blank" rel="noopener">Hexo七牛同步插件</a>. 注册七牛账户完成实名制认证之后就会有10G的免费存储空间。</p>
+</li>
+<li><p><a href="https://chrome.google.com/webstore/detail/%E6%96%B0%E6%B5%AA%E5%BE%AE%E5%8D%9A%E5%9B%BE%E5%BA%8A/fdfdnfpdplfbbnemmmoklbfjbhecpnhf?hl=zh-CN" target="_blank" rel="noopener">chrome插件-微博图床</a>：登录微博账号后就可以在chrome内直接上传，同时生成markdown外链<img src="http://oj1ify5rd.bkt.clouddn.com/static/images/weibo-pictures.png"></p>
+</li>
+<li><p>vps自建：这个应该是最具有定制性的方案了。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
+<li><a href="http://xianbai.me/learn-md/index.html" target="_blank" rel="noopener">Learning-Markdown (Markdown 入门参考)</a></li>
+<li><a href="http://www.jianshu.com/p/24aefcd4ca93" target="_blank" rel="noopener">vim安装markdown插件</a></li>
+<li><a href="http://wuxiaolong.me/2014/10/30/qiniu-photo-bed/" target="_blank" rel="noopener">使用七牛作为github博客的图床</a></li>
+<li><a href="https://www.v2ex.com/t/293827?p=2" target="_blank" rel="noopener">hexo 编辑器推荐</a></li>
+<li><a href="https://github.com/jgm/CommonMark/wiki/Markdown-Flavors" target="_blank" rel="noopener">Markdown Flavors</a></li>
+<li><a href="https://www.zhihu.com/question/24422335" target="_blank" rel="noopener">知乎上面的问答：有哪些好看的 Hexo 主题？</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+              <a href="/tags/vim/" rel="tag"># vim</a>
+              <a href="/tags/emacs/" rel="tag"># emacs</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2016/12/28/Chrome-group-policy%E8%AE%BE%E7%BD%AE/" rel="next" title="Chrome group policy设置">
+      Chrome group policy设置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-amp-A："><span class="nav-number">1.</span> <span class="nav-text">Q &amp; A：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Why-write-blogs？"><span class="nav-number">1.1.</span> <span class="nav-text">Why write blogs？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是markdown？"><span class="nav-number">1.2.</span> <span class="nav-text">什么是markdown？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么使用markdown-写博客？"><span class="nav-number">1.3.</span> <span class="nav-text">为什么使用markdown 写博客？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#markdown-是一种标记式语言。"><span class="nav-number">1.3.1.</span> <span class="nav-text">markdown 是一种标记式语言。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类似于org-mode-的大纲模式"><span class="nav-number">1.3.2.</span> <span class="nav-text">类似于org-mode 的大纲模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#足够轻量"><span class="nav-number">1.3.3.</span> <span class="nav-text">足够轻量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#纯文本格式，编辑工具多、跨平台。"><span class="nav-number">1.3.4.</span> <span class="nav-text">纯文本格式，编辑工具多、跨平台。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说了这么多优点，有哪些坑？"><span class="nav-number">1.4.</span> <span class="nav-text">说了这么多优点，有哪些坑？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#markdown-有很多变体flavour"><span class="nav-number">1.4.1.</span> <span class="nav-text">markdown 有很多变体flavour.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#markdown-并不能很方便地编辑表格或者复杂的流程图"><span class="nav-number">1.4.2.</span> <span class="nav-text">markdown 并不能很方便地编辑表格或者复杂的流程图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Why-hexo？"><span class="nav-number">1.5.</span> <span class="nav-text">Why hexo？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#hexo-容易部署，插件多"><span class="nav-number">1.5.1.</span> <span class="nav-text">hexo 容易部署，插件多</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主题丰富"><span class="nav-number">1.5.2.</span> <span class="nav-text">主题丰富</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#社区大"><span class="nav-number">1.5.3.</span> <span class="nav-text">社区大</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎样插入图片？"><span class="nav-number">1.6.</span> <span class="nav-text">怎样插入图片？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">2.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Nujabse"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Nujabse</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nujabse</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

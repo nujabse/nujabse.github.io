@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"nujabse.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="什么是chrome group policychrome for business and education 的官方帮助页面是这样写的：  为简化政策设置，您可以使用政策模板来指导您轻松完成可配置的选项。这些策略模板适用于想要针对企业管理的设备设置 Chrome 策略的 IT 管理员。  设置Chrome group policy的原因好久没有使用 aria2下载百度云了，今天打开 chrome">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chrome group policy设置">
+<meta property="og:url" content="https://nujabse.github.io/2016/12/28/Chrome-group-policy%E8%AE%BE%E7%BD%AE/index.html">
+<meta property="og:site_name" content="Graphophobia">
+<meta property="og:description" content="什么是chrome group policychrome for business and education 的官方帮助页面是这样写的：  为简化政策设置，您可以使用政策模板来指导您轻松完成可配置的选项。这些策略模板适用于想要针对企业管理的设备设置 Chrome 策略的 IT 管理员。  设置Chrome group policy的原因好久没有使用 aria2下载百度云了，今天打开 chrome">
+<meta property="og:image" content="http://oj1ify5rd.bkt.clouddn.com/static/images/extension-ID.png">
+<meta property="article:published_time" content="2016-12-28T05:23:46.000Z">
+<meta property="article:modified_time" content="2020-07-19T15:54:27.802Z">
+<meta property="article:author" content="Nujabse">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Chrome">
+<meta property="article:tag" content="百度云">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oj1ify5rd.bkt.clouddn.com/static/images/extension-ID.png">
+
+<link rel="canonical" href="https://nujabse.github.io/2016/12/28/Chrome-group-policy%E8%AE%BE%E7%BD%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Chrome group policy设置 | Graphophobia</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Graphophobia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://nujabse.github.io/2016/12/28/Chrome-group-policy%E8%AE%BE%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Nujabse">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Graphophobia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Chrome group policy设置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-12-28 13:23:46" itemprop="dateCreated datePublished" datetime="2016-12-28T13:23:46+08:00">2016-12-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-19 23:54:27" itemprop="dateModified" datetime="2020-07-19T23:54:27+08:00">2020-07-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/utility/" itemprop="url" rel="index"><span itemprop="name">utility</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="什么是chrome-group-policy"><a href="#什么是chrome-group-policy" class="headerlink" title="什么是chrome group policy"></a>什么是chrome group policy</h2><p>chrome for business and education 的官方帮助页面是这样写的：</p>
+<blockquote>
+<p>为简化政策设置，您可以使用政策模板来指导您轻松完成可配置的选项。这些策略模板适用于想要针对企业管理的设备设置 Chrome 策略的 IT 管理员。</p>
+</blockquote>
+<h2 id="设置Chrome-group-policy的原因"><a href="#设置Chrome-group-policy的原因" class="headerlink" title="设置Chrome group policy的原因"></a>设置Chrome group policy的原因</h2><p>好久没有使用 aria2下载百度云了，今天打开 chrome 使用 <a href="https://github.com/acgotaku/BaiduExporter" target="_blank" rel="noopener">baiduexporter</a>导出 aria2 下载时，发现插件被chrome自动禁用了（我的chrome版本：Version 57.0.2950.4)。<br>参看了一下github项目的的 readme:  <a href="https://hencolle.com/2016/10/16/baidu_exporter/" target="_blank" rel="noopener">Guide on Packaging and Import Baidu Exporter to Chrome</a>, 找到了关于自动禁用的解释：</p>
+<blockquote>
+<p>Chrome  removed Baidu Exporter from Chrome App Store due to some unknown Python transaction recently. Due to security reason Chrome will disable extensions import locally with unknown source. You will get annoying popups every time launching Chrome if unpacked extensions are loaded.</p>
+</blockquote>
+<p>发现解决方案只有windows和Mac环境下的。作为Linux党，当然要探索一下如何将插件放入Whitelist，于是就有了下面的这些简单研究，在此记录。</p>
+<a id="more"></a> 
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>以下步骤主要参考chrome 官方文档： <a href="https://www.chromium.org/administrators/linux-quick-start" target="_blank" rel="noopener">Linux Quick Start</a><br>遵循UNIX “一切皆文本”的思想，在Linux下chrome policy 设置的配置文件是一个json（JavaScript Object Notation)文档。文件位置放置在</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;opt&#x2F;google&#x2F;chrome-unstable&#x2F;policies&#x2F;recommended</span><br><span class="line">&#x2F;opt&#x2F;google&#x2F;chrome-unstable&#x2F;policies&#x2F;managed</span><br></pre></td></tr></table></figure>
+<p>对于不同的Linux发行版或者chrome版本，位置可能有所差异，我的是Manjaro Linux + chrome canary. 如果是chrome稳定版，则将名字换为chrome-stable.<br>如果没有这两个位置的话，新建这两个文件夹：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /opt/google/chrome-unstable</span><br><span class="line"><span class="comment"># mkdir policies</span></span><br><span class="line"><span class="comment"># mkdir policies/managed</span></span><br><span class="line"><span class="comment"># mkdir policies/recommended</span></span><br></pre></td></tr></table></figure>
+<p>确保在/managed文件夹下的文件只有管理员才具有写的权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># chmod -w policies/managed</span></span><br></pre></td></tr></table></figure>
+<p>新建一个名为test_policy.json 的配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># touch policies/managed/test_policy.json</span></span><br></pre></td></tr></table></figure>
+<p>在这个文件中加入以下参数，将插件放入whitelist达到插件不被自动禁用的目的：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        <span class="attr">"ExtensionInstallWhitelist"</span>: <span class="string">"enbaolbobnapjapnkhdolebajlfjfojc"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于其它的插件，需要将”enbaolbobnapjapnkhdolebajlfjfojc”替换成你的插件ID。插件ID可以在在chrome地址栏输入chrome://extensions查看</p>
+<p><img src="http://oj1ify5rd.bkt.clouddn.com/static/images/extension-ID.png" alt="chrome extension-ID"></p>
+<p>更多的设置项和参数可以参考官方的 <a href="https://www.chromium.org/dministrators/policy-list-3" target="_blank" rel="noopener">policy list</a></p>
+<p>再打开chrome， 就可以继续愉快地用baiduexporter + aria2 下载了</p>
+<h2 id="To-be-continued"><a href="#To-be-continued" class="headerlink" title="To be continued"></a>To be continued</h2><p>在查阅chrome官方文档时我想到了原来在Windows下的chrome主页被篡改的问题，也许和chrome group policy被修改有关？</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
+<li><a href="https://support.google.com/chrome/a/answer/187202?hl=zh-Hans" target="_blank" rel="noopener">设置针对设备的 Chrome 策略</a></li>
+<li><a href="https://www.wikiwand.com/zh-cn/JSON" target="_blank" rel="noopener">Wikipedia 关于Json的介绍</a></li>
+<li><a href="https://www.chromium.org/developers/how-tos/enterprise/adding-new-policies" target="_blank" rel="noopener">Policy Settings in Chrome</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Chrome/" rel="tag"># Chrome</a>
+              <a href="/tags/%E7%99%BE%E5%BA%A6%E4%BA%91/" rel="tag"># 百度云</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/12/26/A%20first%20hello/" rel="prev" title="A first hello">
+      <i class="fa fa-chevron-left"></i> A first hello
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/01/03/Host-%E7%9B%B4%E8%BF%9E%E6%95%99%E7%A8%8B/" rel="next" title="Host 直连教程">
+      Host 直连教程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是chrome-group-policy"><span class="nav-number">1.</span> <span class="nav-text">什么是chrome group policy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置Chrome-group-policy的原因"><span class="nav-number">2.</span> <span class="nav-text">设置Chrome group policy的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">3.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#To-be-continued"><span class="nav-number">4.</span> <span class="nav-text">To be continued</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">5.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Nujabse"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Nujabse</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nujabse</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

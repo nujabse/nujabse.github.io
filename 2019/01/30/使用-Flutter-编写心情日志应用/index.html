@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"nujabse.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="去年参加 Google Developer Days 的时候就被好好安利了一波，这一周好好研究了以下，成功实现了从 dart 零基础到写出跨 iOS 和 Android 的应用。为了编译成 iOS App，我还不得不花了点时间在 g470 上安装了黑苹果，效果居然还不错。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Flutter 编写心情日志应用">
+<meta property="og:url" content="https://nujabse.github.io/2019/01/30/%E4%BD%BF%E7%94%A8-Flutter-%E7%BC%96%E5%86%99%E5%BF%83%E6%83%85%E6%97%A5%E5%BF%97%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="Graphophobia">
+<meta property="og:description" content="去年参加 Google Developer Days 的时候就被好好安利了一波，这一周好好研究了以下，成功实现了从 dart 零基础到写出跨 iOS 和 Android 的应用。为了编译成 iOS App，我还不得不花了点时间在 g470 上安装了黑苹果，效果居然还不错。">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/bd120474ly1frrzq1c37ij20iy0fiwg5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/bd120474ly1frrztcekvzj20rl0efq3l.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/bd120474ly1frs02d00toj20cz0gajrw.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/bd120474ly1frs05un5b4j20hk0iigmt.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/bd120474ly1frs0ahff5mj20jo05cdg4.jpg">
+<meta property="article:published_time" content="2019-01-30T15:11:36.000Z">
+<meta property="article:modified_time" content="2019-01-30T15:11:36.000Z">
+<meta property="article:author" content="Nujabse">
+<meta property="article:tag" content="dart">
+<meta property="article:tag" content="flutter">
+<meta property="article:tag" content="ios">
+<meta property="article:tag" content="android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/bd120474ly1frrzq1c37ij20iy0fiwg5.jpg">
+
+<link rel="canonical" href="https://nujabse.github.io/2019/01/30/%E4%BD%BF%E7%94%A8-Flutter-%E7%BC%96%E5%86%99%E5%BF%83%E6%83%85%E6%97%A5%E5%BF%97%E5%BA%94%E7%94%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>使用 Flutter 编写心情日志应用 | Graphophobia</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Graphophobia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://nujabse.github.io/2019/01/30/%E4%BD%BF%E7%94%A8-Flutter-%E7%BC%96%E5%86%99%E5%BF%83%E6%83%85%E6%97%A5%E5%BF%97%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Nujabse">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Graphophobia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用 Flutter 编写心情日志应用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-30 23:11:36" itemprop="dateCreated datePublished" datetime="2019-01-30T23:11:36+08:00">2019-01-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index"><span itemprop="name">programming</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>去年参加 Google Developer Days 的时候就被好好安利了一波，这一周好好研究了以下，成功实现了从 dart 零基础到写出跨 iOS 和 Android 的应用。为了编译成 iOS App，我还不得不花了点时间在 g470 上安装了黑苹果，效果居然还不错。</p>
+<a id="more"></a> 
+<h2 id="安装配置-Flutter-SDK"><a href="#安装配置-Flutter-SDK" class="headerlink" title="安装配置 Flutter SDK"></a>安装配置 Flutter SDK</h2><h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>首先从 flutter 官网上下载 <a href="https://flutter.io/get-started/install/" target="_blank" rel="noopener">flutter sdk</a>, 无法访问的可以尝试 <a href="https://flutterchina.club/get-started/install/" target="_blank" rel="noopener">国内镜像</a>, 下载下来是一个压缩包，解压到目录下<br><img src="http://ww1.sinaimg.cn/large/bd120474ly1frrzq1c37ij20iy0fiwg5.jpg"><br>点击 <strong>flutter_console</strong> ，看到这样的界面就已经可以使用了。<br><img src="http://ww1.sinaimg.cn/large/bd120474ly1frrztcekvzj20rl0efq3l.jpg"><br>为了在 cmd 中能够全局使用，我们可以把 <strong>flutter sdk</strong> 加入系统环境变量。打开 <strong>控制面板\系统和安全\系统</strong> ，点击 <strong>高级系统设置–&gt; 环境变量</strong> ：<br><img src="https://ws1.sinaimg.cn/large/bd120474ly1frs02d00toj20cz0gajrw.jpg"><br>点击 <strong>Path</strong> ，选择 <strong>编辑</strong><br><img src="https://ws1.sinaimg.cn/large/bd120474ly1frs05un5b4j20hk0iigmt.jpg"><br>在弹出的界面里面选择 新建 ，复制粘贴解压的 <code>flutter\bin</code> 目录到文本框内就可以了：<br><img src="https://ws1.sinaimg.cn/large/bd120474ly1frs0ahff5mj20jo05cdg4.jpg"><br>再试着打开 cmd ， 输入 <code>flutter doctor</code>， 就能看到相应的输出。</p>
+<h3 id="Mac-os"><a href="#Mac-os" class="headerlink" title="Mac os"></a>Mac os</h3><p>Mac os 上面的配置过程类似，下载好 SDK 后，将 flutter sdk 加入 path 变量即可。以 zsh shell 为例，编辑 ~/.zshrc，将 /flutter/bin 目录加到PATH 这一行就可以</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=[PATH_TO_FLUTTER_GIT_DIRECTORY]/flutter/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<h4 id="配置Xcode-实机调试"><a href="#配置Xcode-实机调试" class="headerlink" title="配置Xcode 实机调试"></a>配置Xcode 实机调试</h4><p>flutter 框架写出来的程序可以编译在 android 和 iOS 两大平台上运行。编译成 apk 的方法在 <a href="https://flutter.io/get-started/editor/" target="_blank" rel="noopener">官网</a> 上有详细的教程，这里记录一下在 Mac os 上利用 xcode 编译遇到的问题。</p>
+<ol>
+<li>flutter 配置部署需要依赖安装 cocoapods：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br><span class="line">brew install --HEAD libimobiledevice</span><br><span class="line">brew install ideviceinstaller ios-deploy cocoapods</span><br><span class="line">pod setup</span><br></pre></td></tr></table></figure></li>
+<li>由于我的系统还停留在 10.12.6，因此应用商店上下载的 xcode 并不是最新版本，而在使用 11.3 系统的 iphone 真机调试的时候会报出警告 <code>Could not locate device support files</code> 解决办法也很简单，参考了这篇 博客 。不需要升级系统或者下载更新 xcode ，只需要拷贝一个文件即可: 从 github 上下载支持文件，然后将其拖放到 <code>Contents--&gt;Developer--&gt;Platforms--&gt;iPhoneOS.platform--&gt;DeviceSupport/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport</code> 相应的系统目录下就可以。</li>
+<li>应用签名的问题。现在的 xcode 不需要开发者账户也能在实体设备上安装调试应用（但是发布到应用商店是必须要的），参看 <a href="https://blog.csdn.net/zhenggaoxing/article/details/79042382" target="_blank" rel="noopener">这篇博客教程</a> ，添加个人 appStore 账户作为个人开发者也可以调试运行</li>
+</ol>
+<h2 id="Json-文件本地存储与读取"><a href="#Json-文件本地存储与读取" class="headerlink" title="Json 文件本地存储与读取"></a>Json 文件本地存储与读取</h2><p>这个问题花了我一点时间，总体的结局思路是 dart object 和 json object之间的互转，再将本地 json 作为 String 写入文本文档。</p>
+<h3 id="文件-IO"><a href="#文件-IO" class="headerlink" title="文件 IO"></a>文件 IO</h3><p>dart 提供了内置的 io 库，flutter 上面也有 path_provider 插件。</p>
+<ol>
+<li>安装 path_provider插件<br>编辑 pubspec.yml 文件，加入依赖：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dependencies:</span><br><span class="line">  flutter:</span><br><span class="line">    sdk: flutter</span><br><span class="line"></span><br><span class="line">  # The following adds the Cupertino Icons font to your application.</span><br><span class="line">  # Use with the CupertinoIcons class for iOS style icons.</span><br><span class="line">  cupertino_icons: ^0.1.0</span><br><span class="line">  path_provider: ^0.4.0</span><br></pre></td></tr></table></figure>
+点击 Android Studio 里面的 Packages get 之后，就会自动下载安装依赖。</li>
+<li>获取应用程序目录和缓存目录，参考 <a href="https://pub.dartlang.org/packages/path_provider" target="_blank" rel="noopener">官方示例</a><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'dart:io'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'package:path_provider/path_provider.dart'</span>;</span><br><span class="line">Directory tempDir = <span class="keyword">await</span> getTemporaryDirectory();</span><br><span class="line"><span class="built_in">String</span> tempPath = tempDir.path;</span><br><span class="line"></span><br><span class="line">Directory appDocDir = <span class="keyword">await</span> getApplicationDocumentsDirectory();</span><br><span class="line"><span class="built_in">String</span> appDocPath = appDocDir.path;</span><br></pre></td></tr></table></figure>
+<h3 id="读取-Json"><a href="#读取-Json" class="headerlink" title="读取 Json"></a>读取 Json</h3>查看 dart 官方库里面的 json.dart 源代码，有如下的代码注释：<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">* Parses the string and returns the resulting Json object.</span><br><span class="line">   *</span><br><span class="line">   * The optional [reviver] function <span class="keyword">is</span> called once <span class="keyword">for</span> each object or list</span><br><span class="line">   * property that has been parsed during decoding. The `key` argument <span class="keyword">is</span> either</span><br><span class="line">   * the integer list index <span class="keyword">for</span> a list property, the string map key <span class="keyword">for</span> object</span><br><span class="line">   * properties, or `<span class="keyword">null</span>` <span class="keyword">for</span> the <span class="keyword">final</span> result. Like <span class="keyword">this</span>:</span><br><span class="line">   *</span><br><span class="line">   * The <span class="keyword">default</span> [reviver] (when not provided) <span class="keyword">is</span> the identity function.</span><br><span class="line">   */</span><br><span class="line">  <span class="built_in">dynamic</span> decode(<span class="built_in">String</span> source, &#123;reviver(<span class="built_in">Object</span> key, <span class="built_in">Object</span> value)&#125;) &#123;</span><br><span class="line">    <span class="keyword">if</span> (reviver == <span class="keyword">null</span>) reviver = _reviver;</span><br><span class="line">    <span class="keyword">if</span> (reviver == <span class="keyword">null</span>) <span class="keyword">return</span> decoder.convert(source);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> JsonDecoder(reviver).convert(source);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+可见 json.decode 是将符合 json 标准 的字符串转变为 object ，可以是 List, Map.</li>
+</ol>
+<h3 id="object-与-json"><a href="#object-与-json" class="headerlink" title="object 与 json"></a>object 与 json</h3><p>官方文档里面是这样描述的：</p>
+<blockquote>
+<p>Decoding and encoding JSON<br>Decode a JSON-encoded string into a Dart object with jsonDecode():</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// <span class="doctag">NOTE:</span> Be sure to use double quotes ("),</span></span><br><span class="line"><span class="comment">// not single quotes ('), inside the JSON string.</span></span><br><span class="line"><span class="comment">// This string is JSON, not Dart.</span></span><br><span class="line"><span class="keyword">var</span> jsonString = <span class="string">'''</span></span><br><span class="line"><span class="string">[</span></span><br><span class="line"><span class="string">    &#123;"score": 40&#125;,</span></span><br><span class="line"><span class="string">    &#123;"score": 80&#125;</span></span><br><span class="line"><span class="string">]</span></span><br><span class="line"><span class="string">'''</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> scores = jsonDecode(jsonString);</span><br><span class="line"><span class="keyword">assert</span>(scores <span class="keyword">is</span> <span class="built_in">List</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> firstScore = scores[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">assert</span>(firstScore <span class="keyword">is</span> <span class="built_in">Map</span>);</span><br><span class="line"><span class="keyword">assert</span>(firstScore[<span class="string">'score'</span>] == <span class="number">40</span>);</span><br></pre></td></tr></table></figure>
+
+<p>Encode a supported Dart object into a JSON-formatted string with jsonEncode():</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scores = [</span><br><span class="line">  &#123;<span class="string">'score'</span>: <span class="number">40</span>&#125;,</span><br><span class="line">  &#123;<span class="string">'score'</span>: <span class="number">80</span>&#125;,</span><br><span class="line">  &#123;<span class="string">'score'</span>: <span class="number">100</span>, <span class="string">'overtime'</span>: <span class="keyword">true</span>, <span class="string">'special_guest'</span>: <span class="keyword">null</span>&#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> jsonText = jsonEncode(scores);</span><br><span class="line"><span class="keyword">assert</span>(jsonText ==</span><br><span class="line">    <span class="string">'[&#123;"score":40&#125;,&#123;"score":80&#125;,'</span></span><br><span class="line">    <span class="string">'&#123;"score":100,"overtime":true,'</span></span><br><span class="line">    <span class="string">'"special_guest":null&#125;]'</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Only objects of type int, double, String, bool, null, List, or Map (with string keys) are directly encodable into JSON. List and Map objects are encoded recursively.</p>
+</blockquote>
+<h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><ol>
+<li>在 NotePage 中使用 RadioListTile widget，利用用户的选择值和时间构造 json 数据：<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">List</span>&lt;Widget&gt; makeRadioList() &#123;</span><br><span class="line">    <span class="built_in">List</span>&lt;Widget&gt; list = <span class="keyword">new</span> <span class="built_in">List</span>&lt;Widget&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">-2</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">      list.add(<span class="keyword">new</span> RadioListTile(</span><br><span class="line">        value: i,</span><br><span class="line">        title: <span class="keyword">new</span> Text(<span class="string">'心情  <span class="subst">$i</span>'</span>),</span><br><span class="line">        activeColor: Colors.deepOrange,</span><br><span class="line">        groupValue: _selected,</span><br><span class="line">        onChanged: (<span class="built_in">int</span> value) &#123;</span><br><span class="line">          onChanged(value);</span><br><span class="line">        &#125;,</span><br><span class="line">        subtitle: <span class="keyword">new</span> Text(<span class="string">'心情值'</span>),</span><br><span class="line">        secondary: <span class="keyword">new</span> Icon(Icons.favorite),</span><br><span class="line">      ));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li>将每次获取到的 json 数据添加到一个 List 之中。采用字符串手动拼接构建 List:<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> moodObject =</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">'Time'</span>: key,</span><br><span class="line">        <span class="string">'Value'</span>: value,</span><br><span class="line">      &#125;;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"mood object is: "</span> + moodObject.toString());</span><br><span class="line">    <span class="keyword">var</span> jsonText = json.encode(moodObject);</span><br><span class="line">    <span class="comment">// manually construct a List</span></span><br><span class="line">    jsonText = <span class="string">'['</span> + jsonText + <span class="string">']'</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="后续TODO"><a href="#后续TODO" class="headerlink" title="后续TODO"></a>后续TODO</h2><h3 id="模块化和页面跳转"><a href="#模块化和页面跳转" class="headerlink" title="模块化和页面跳转"></a>模块化和页面跳转</h3><h3 id="界面优化"><a href="#界面优化" class="headerlink" title="界面优化"></a>界面优化</h3><h3 id="接入野狗-SDK"><a href="#接入野狗-SDK" class="headerlink" title="接入野狗 SDK"></a>接入野狗 SDK</h3></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/flutter/" rel="tag"># flutter</a>
+              <a href="/tags/Android/" rel="tag"># Android</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/09/%E6%95%99%E8%82%B2%E4%B8%93%E4%BA%AB%E4%BC%98%E6%83%A0%E6%94%B6%E9%9B%86/" rel="prev" title="教育优惠收集">
+      <i class="fa fa-chevron-left"></i> 教育优惠收集
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/20/Cent-os-compile-p4vasp-tutorial/" rel="next" title="Cent os compile p4vasp tutorial">
+      Cent os compile p4vasp tutorial <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装配置-Flutter-SDK"><span class="nav-number">1.</span> <span class="nav-text">安装配置 Flutter SDK</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows"><span class="nav-number">1.1.</span> <span class="nav-text">windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac-os"><span class="nav-number">1.2.</span> <span class="nav-text">Mac os</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Xcode-实机调试"><span class="nav-number">1.2.1.</span> <span class="nav-text">配置Xcode 实机调试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Json-文件本地存储与读取"><span class="nav-number">2.</span> <span class="nav-text">Json 文件本地存储与读取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件-IO"><span class="nav-number">2.1.</span> <span class="nav-text">文件 IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取-Json"><span class="nav-number">2.2.</span> <span class="nav-text">读取 Json</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#object-与-json"><span class="nav-number">2.3.</span> <span class="nav-text">object 与 json</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现思路"><span class="nav-number">2.4.</span> <span class="nav-text">实现思路</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后续TODO"><span class="nav-number">3.</span> <span class="nav-text">后续TODO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模块化和页面跳转"><span class="nav-number">3.1.</span> <span class="nav-text">模块化和页面跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#界面优化"><span class="nav-number">3.2.</span> <span class="nav-text">界面优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接入野狗-SDK"><span class="nav-number">3.3.</span> <span class="nav-text">接入野狗 SDK</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Nujabse"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Nujabse</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nujabse</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

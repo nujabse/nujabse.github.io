@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"nujabse.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="好久时间没有更新spacemacs了，一直到今天，我还是运行的spacemacs 0.105版本，因为它一直以来都很稳定。今天手贱点了update packages, 在Emacs备份完当前packages之后，重启Emacs就出现报错 Error encountered while loading .spacemacs好吧，着手修复。 查明问题在终端使用命令 1$ emacs --insecur">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spacemacs 修复记">
+<meta property="og:url" content="https://nujabse.github.io/2017/01/04/spacemacs-%E4%BF%AE%E5%A4%8D%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Graphophobia">
+<meta property="og:description" content="好久时间没有更新spacemacs了，一直到今天，我还是运行的spacemacs 0.105版本，因为它一直以来都很稳定。今天手贱点了update packages, 在Emacs备份完当前packages之后，重启Emacs就出现报错 Error encountered while loading .spacemacs好吧，着手修复。 查明问题在终端使用命令 1$ emacs --insecur">
+<meta property="og:image" content="http://oj1ify5rd.bkt.clouddn.com/static/images/%E6%B8%85%E5%8D%8E%E5%A4%A7%E5%AD%A6%E9%95%9C%E5%83%8F.png">
+<meta property="article:published_time" content="2017-01-04T02:20:32.000Z">
+<meta property="article:modified_time" content="2020-07-19T15:54:27.802Z">
+<meta property="article:author" content="Nujabse">
+<meta property="article:tag" content="emacs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oj1ify5rd.bkt.clouddn.com/static/images/%E6%B8%85%E5%8D%8E%E5%A4%A7%E5%AD%A6%E9%95%9C%E5%83%8F.png">
+
+<link rel="canonical" href="https://nujabse.github.io/2017/01/04/spacemacs-%E4%BF%AE%E5%A4%8D%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>spacemacs 修复记 | Graphophobia</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Graphophobia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://nujabse.github.io/2017/01/04/spacemacs-%E4%BF%AE%E5%A4%8D%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Nujabse">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Graphophobia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          spacemacs 修复记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-01-04 10:20:32" itemprop="dateCreated datePublished" datetime="2017-01-04T10:20:32+08:00">2017-01-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-19 23:54:27" itemprop="dateModified" datetime="2020-07-19T23:54:27+08:00">2020-07-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>好久时间没有更新spacemacs了，一直到今天，我还是运行的spacemacs 0.105版本，因为它一直以来都很稳定。今天手贱点了update packages, 在Emacs备份完当前packages之后，重启Emacs就出现报错 <code>Error encountered while loading .spacemacs</code><br>好吧，着手修复。</p>
+<h2 id="查明问题"><a href="#查明问题" class="headerlink" title="查明问题"></a>查明问题</h2><p>在终端使用命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ emacs --insecure --debug-init</span><br></pre></td></tr></table></figure>
+<p>报错的第一条信息是<code>error unable to activate package pythonic, required package f-0.17.2 is unavailable</code><br>最初我以为是<del>elpa被干扰无法访问的问题</del>, 配置代理之后仍然没有效果。在一番搜索之后找到了一个与我的问题相类似的issue: <a href="https://github.com/syl20bnr/spacemacs/issues/572" target="_blank" rel="noopener">anzu package missing</a> . 参考syl20bnr给出的建议，找到解决方法</p>
+<a id="more"></a> 
+<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><ol>
+<li>删除elpa文件夹内所有的内容再重装<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> .emacs.d</span><br><span class="line">rm -rf elpa</span><br></pre></td></tr></table></figure></li>
+<li>Emacs会自动重新安装所有的依赖包，但是由于国内网络的问题，200多个包安装起来很慢。最终我选择了使用<a href="https://mirrors.tuna.tsinghua.edu.cn/help/elpa/" target="_blank" rel="noopener">清华大学开源软件镜像站</a>提供的ELPA镜像源，速度快了很多。<img src="http://oj1ify5rd.bkt.clouddn.com/static/images/%E6%B8%85%E5%8D%8E%E5%A4%A7%E5%AD%A6%E9%95%9C%E5%83%8F.png"><br>参考清华大学镜像站的官方文档，在.spacemacs的dotspacemacs/user-init() 添加如下代码：<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">setq</span> configuration-layer--elpa-archives</span><br><span class="line">    '((<span class="string">"melpa-cn"</span> . <span class="string">"http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"</span>)</span><br><span class="line">      (<span class="string">"org-cn"</span>   . <span class="string">"http://mirrors.tuna.tsinghua.edu.cn/elpa/org/"</span>)</span><br><span class="line">      (<span class="string">"gnu-cn"</span>   . <span class="string">"http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"</span>)))</span><br></pre></td></tr></table></figure></li>
+<li>配置完之后重新安装仍然报错：<code>package org-plus-contrib is not availabe. Is the package name misspelled?</code> 查阅<a href="http://orgmode.org/elpa.html" target="_blank" rel="noopener">org-mode 官方文档</a>后，问题得到了解决。在.spacemacs文件中加入这两行：<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">require</span> 'package)</span><br><span class="line">(<span class="name">add-to-list</span> 'package-archives '(<span class="string">"org"</span> . <span class="string">"http://orgmode.org/elpa/"</span>) <span class="literal">t</span>)</span><br></pre></td></tr></table></figure>
+Org Emacs Package Archive 官网是这样介绍的：<blockquote>
+<p>org<br>contains the same set of files that are included in GNU Emacs.<br>org-plus-contrib<br>contains these files plus all contribs files, the ones you find in contrib/ from the git repo.</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="手动更新"><a href="#手动更新" class="headerlink" title="手动更新"></a>手动更新</h2><p>自带的check update一直失败，参考官方文档手动更新：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git fetch</span><br><span class="line">git reset --hard &lt;tag version <span class="built_in">which</span> you are updating to&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="j-k-for-browsing-wrapped-lines"><a href="#j-k-for-browsing-wrapped-lines" class="headerlink" title="j/k for browsing wrapped lines"></a>j/k for browsing wrapped lines</h2><p>在使用spacemacs 的evil mode 浏览文本时，经常会出现一个长句子本身在屏幕上显示为两行，但是实际上为一整行的情况，这时使用<code>jk</code> 上下移动的时候，会跳过整段话。在使用vim 的时候，我们可以自定义keymap，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nnoremap j gj</span><br><span class="line">nnoremap k gk</span><br><span class="line">vnoremap j gj</span><br><span class="line">vnoremap k gk</span><br></pre></td></tr></table></figure>
+<p>为了解决Emacs 上面同样的问题，我找到了在<a href="http://stackoverflow.com/questions/9713967/how-can-i-intuitively-move-cursor-in-vimnot-by-line" target="_blank" rel="noopener">stackoverflow</a>上面的相关的问答描述。参考排名第一的答案，我找到了适用于spacemacs 的配置。以下步骤来自一位大神写的vim 迁移 Emacs 指南: <a href="https://github.com/lujun9972/emacs-document/blob/master/emacs-common/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E4%BB%8EVim%E8%BF%81%E7%A7%BB%E5%88%B0Emacs%2BEvil.org" target="_blank" rel="noopener">手把手教你从Vim迁移到Emacs+Evil</a></p>
+<blockquote>
+<p>Evil也跟Vim一样,在用j/k浏览很长的行时,会跳过整个”实际”的句子,而不是显示出来的行. 解决方法也很简单:</p>
+</blockquote>
+<blockquote>
+<p>(define-key evil-normal-state-map (kbd “j”) ‘evil-next-visual-line)<br>(define-key evil-normal-state-map (kbd “k”) ‘evil-previous-visual-line)</p>
+</blockquote>
+<h2 id="fcitx-集成"><a href="#fcitx-集成" class="headerlink" title="fcitx 集成"></a>fcitx 集成</h2><p>类似于vim 的fcitx.vim 插件，Emacs 也有一个package 致力于解决中文fcitx 输入法在编辑器normal state 下需要切换为英文才能输入命令的问题。<br>安装<a href="https://github.com/cute-jumper/fcitx.el" target="_blank" rel="noopener">fcitx.el</a> 即可。不过spacemacs 默认对于不在additional package 列表中的包会在下次启动时识别为 orphan , 因此需要在dotspacemacs 中进行配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dotspacemacs-additional-packages &#39;(fcitx)</span><br><span class="line">;; A list of packages and&#x2F;or extensions that will not be install and loaded.</span><br></pre></td></tr></table></figure>
+<p>安装后选择 aggressive setup: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">M-x fcitx-default-setup</span><br></pre></td></tr></table></figure>
+<p>即可生效。</p>
+<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><ol>
+<li>Turn off smartparens. You can toggle it with SPC t p. To disable it permanently you can put smartparens in dotspacemacs-excluded-packages.  Reference:<br><a href="https://www.reddit.com/r/emacs/comments/39gxye/stop_spacemacs_from_auto_inserting_parenthesis/" target="_blank" rel="noopener">smartparens-reddit</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/emacs/" rel="tag"># emacs</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/01/03/Host-%E7%9B%B4%E8%BF%9E%E6%95%99%E7%A8%8B/" rel="prev" title="Host 直连教程">
+      <i class="fa fa-chevron-left"></i> Host 直连教程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/01/05/Manjaro-%E6%95%85%E9%9A%9C%E4%BF%AE%E5%A4%8D%E8%AE%B0%E5%BD%95/" rel="next" title="Manjaro 故障修复记录">
+      Manjaro 故障修复记录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#查明问题"><span class="nav-number">1.</span> <span class="nav-text">查明问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决问题"><span class="nav-number">2.</span> <span class="nav-text">解决问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手动更新"><span class="nav-number">3.</span> <span class="nav-text">手动更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#j-k-for-browsing-wrapped-lines"><span class="nav-number">4.</span> <span class="nav-text">j&#x2F;k for browsing wrapped lines</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fcitx-集成"><span class="nav-number">5.</span> <span class="nav-text">fcitx 集成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tips"><span class="nav-number">6.</span> <span class="nav-text">Tips</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Nujabse"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Nujabse</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nujabse</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

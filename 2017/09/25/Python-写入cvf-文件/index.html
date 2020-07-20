@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"nujabse.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="好久没有写 Python 脚本了。最近遇到的一个实际33需求就是：如何将 Excel 表格中的单元格数据提取出成一个 vCard 文件？表格内容看起来是这样的：    ID Address Name Phone Number          在 Python 数目众多的第三方库中搜索，我找到了      vobject.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 写入vcf文件">
+<meta property="og:url" content="https://nujabse.github.io/2017/09/25/Python-%E5%86%99%E5%85%A5cvf-%E6%96%87%E4%BB%B6/index.html">
+<meta property="og:site_name" content="Graphophobia">
+<meta property="og:description" content="好久没有写 Python 脚本了。最近遇到的一个实际33需求就是：如何将 Excel 表格中的单元格数据提取出成一个 vCard 文件？表格内容看起来是这样的：    ID Address Name Phone Number          在 Python 数目众多的第三方库中搜索，我找到了      vobject.">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/bd120474gy1fjtwpkon1aj20c502sdj4.jpg">
+<meta property="article:published_time" content="2017-09-24T16:08:29.000Z">
+<meta property="article:modified_time" content="2017-09-24T16:08:29.000Z">
+<meta property="article:author" content="Nujabse">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="vcf">
+<meta property="article:tag" content="vCard">
+<meta property="article:tag" content="excel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/bd120474gy1fjtwpkon1aj20c502sdj4.jpg">
+
+<link rel="canonical" href="https://nujabse.github.io/2017/09/25/Python-%E5%86%99%E5%85%A5cvf-%E6%96%87%E4%BB%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Python 写入vcf文件 | Graphophobia</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Graphophobia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://nujabse.github.io/2017/09/25/Python-%E5%86%99%E5%85%A5cvf-%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Nujabse">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Graphophobia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python 写入vcf文件
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-09-25 00:08:29" itemprop="dateCreated datePublished" datetime="2017-09-25T00:08:29+08:00">2017-09-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>好久没有写 Python 脚本了。最近遇到的一个实际33需求就是：如何将 Excel 表格中的单元<br>格数据提取出成一个 vCard 文件？表格内容看起来是这样的：</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Address</th>
+<th>Name</th>
+<th>Phone Number</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>在 Python 数目众多的第三方库中搜索，我找到了</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>vobject.</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<a id="more"></a> 
+<h2 id="安装-openpyxl-和-vobject-库"><a href="#安装-openpyxl-和-vobject-库" class="headerlink" title="安装 openpyxl 和 vobject 库"></a>安装 openpyxl 和 vobject 库</h2><p>直接 pip 安装，对于 Linux 用户可以在 pip 后加上 <code>--user</code> 参数安装到用户目录下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --user openpyxl vobject</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用openpyxl-提取数据"><a href="#使用openpyxl-提取数据" class="headerlink" title="使用openpyxl 提取数据"></a>使用openpyxl 提取数据</h2><p><a href="https://bitbucket.org/openpyxl/openpyxl" target="_blank" rel="noopener">openpyxl</a> 是一个读取/写入  Excel 2010 xlsx/xlsm/xltx/xltm 文件的 Python 库，很容易上手，官方的文档写得很详细，项目也在活跃开发中。不过我碰到的最大的缺点是在一次性写入大量数据的时候比较耗 CPU. 这里简要介绍一下如何读取 Excel 单元格数据。</p>
+<h3 id="打开并读取-excel-文件-获取所需-sheet："><a href="#打开并读取-excel-文件-获取所需-sheet：" class="headerlink" title="打开并读取 excel 文件, 获取所需 sheet："></a>打开并读取 excel 文件, 获取所需 sheet：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wb = load_workbook(<span class="string">'mydata.xlsx'</span>)</span><br><span class="line">ws = wb[<span class="string">'Sheet1'</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="读取制定列元素-openpyxl-的语法和-Excel-函数很像："><a href="#读取制定列元素-openpyxl-的语法和-Excel-函数很像：" class="headerlink" title="读取制定列元素.  openpyxl 的语法和 Excel 函数很像："></a>读取制定列元素.  openpyxl 的语法和 Excel 函数很像：</h3><ul>
+<li>获取一整列或者一整行单元格<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">colA = ws[<span class="string">'A'</span>]</span><br><span class="line">row10 = ws[<span class="string">'10'</span>]</span><br></pre></td></tr></table></figure></li>
+<li>获取制定范围内（类似于矩形选择）的单元格<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DataRange = ws[<span class="string">'A3'</span>:<span class="string">'G5'</span>]</span><br><span class="line"><span class="comment"># 获取制定的一个单元格</span></span><br><span class="line">Cell = ws[<span class="string">'G6'</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="调用-cell-value-获取单元格值"><a href="#调用-cell-value-获取单元格值" class="headerlink" title="调用 cell.value 获取单元格值"></a>调用 <code>cell.value</code> 获取单元格值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c.value = <span class="string">'hello, world'</span></span><br><span class="line">print(c.value)</span><br></pre></td></tr></table></figure>
+<h2 id="vcf-文件格式介绍"><a href="#vcf-文件格式介绍" class="headerlink" title=".vcf 文件格式介绍"></a><strong>.vcf</strong> 文件格式介绍</h2><a href="https://fileinfo.com/extension/vcf" target="_blank" rel="noopener">FileInfo</a> 网站上面的介绍是这样的：<blockquote>
+<p>VCF 文件是一种存储联系人信息的标准文件格式，文件内通常包括姓名、地址、电话、电子邮箱等联系人信息。VCF 文件同样也可以存储制定域、图像和其它媒体信息。手机用户可以直接由联系人应用导入VCF文件。</p>
+</blockquote>
+</li>
+</ul>
+<p>.vcf 文件是纯文本文件，这也意味着你可以直接使用文本编辑器查看和编辑它，这也为我们使用 python 的字符串拼接写入文本信息提供了可能。用文本编辑器打开它会显示成这个样子：<img src="http://ww1.sinaimg.cn/large/bd120474gy1fjtwpkon1aj20c502sdj4.jpg"></p>
+<p>如图片中显示的那样，vCard 文件首先以 <code>BEGIN VCARD</code> 开始，以 <code>END:VCARD </code> 结束。 <code>VERSION：3.0</code> 表示采用 3.0 版本的标准。详细的标准可以参看<a href="https://tools.ietf.org/html/rfc6350" target="_blank" rel="noopener"> vCard Format Specification</a> 手册。这里我们要用到的就是以下几个：</p>
+<ol>
+<li><p>FN: Full Name  <strong>注意一个vCard 文件必须包含 FN 类型</strong></p>
+<p> Purpose:  To specify the formatted text corresponding to the name of the object the vCard represents.<br> Value type:  A single text value.</p>
+</li>
+<li><p>TEL: Telephone Number</p>
+<p> Purpose:  To specify the telephone number for telephony communication  with the object the vCard represents.</p>
+<p> Value type:  By default, it is a single free-form text value </p>
+</li>
+</ol>
+<h2 id="利用vobject-写入-vcf-文件"><a href="#利用vobject-写入-vcf-文件" class="headerlink" title="利用vobject 写入 .vcf 文件"></a>利用vobject 写入 <strong>.vcf</strong> 文件</h2><ol>
+<li>创建 vCard 对象：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> vobject</span><br><span class="line">j = vobject.vCard()</span><br></pre></td></tr></table></figure></li>
+<li>添加MIME 信息<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">j.add(<span class="string">'fn'</span>).value = yourname</span><br><span class="line">j.add(<span class="string">'tel'</span>).value = yourtel</span><br></pre></td></tr></table></figure></li>
+<li>Serializing, 自动补全所有其它需要的属性。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">j.serialize()</span><br><span class="line"><span class="comment"># 打印输出测试</span></span><br><span class="line">j.prettyPrint()</span><br></pre></td></tr></table></figure>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2>在写这个很简易的脚本中，最困扰我的问题就是添加联系人地址。如果你简单地写<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">j.add(<span class="string">'add'</span>).value = some_string</span><br></pre></td></tr></table></figure>
+那么当运行 <code>j.serialize()</code> 的时候，会出现报错：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vobject.base.NativeError: <span class="string">"In transformFromNative, unhandled exception on line None &lt;class 'AttributeError'&gt;: 'str' object has no attribute 'box'"</span></span><br></pre></td></tr></table></figure>
+为了解决这个问题，我查了一下源码：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Address</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, street=<span class="string">''</span>, city=<span class="string">''</span>, region=<span class="string">''</span>, code=<span class="string">''</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 country=<span class="string">''</span>, box=<span class="string">''</span>, extended=<span class="string">''</span>)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Each name attribute can be a string or a list of strings.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.box = box</span><br><span class="line">        self.extended = extended</span><br><span class="line">        self.street = street</span><br><span class="line">        self.city = city</span><br><span class="line">        self.region = region</span><br><span class="line">        self.code = code</span><br><span class="line">        self.country = country</span><br></pre></td></tr></table></figure>
+出现这个问题的的原因是 vobject 默认地址包含 box、code、country 等附加完整信息，解决的方法也很简单，直接制定 <code>adr</code> 为 <code>vobject.vcard.Address(&#39;some)_place&#39;)</code> 即可避免报错。正确的方式参看官方测试实例：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 传递多个值</span></span><br><span class="line">card.add(<span class="string">'adr'</span>).value = vobject.vcard.Address(<span class="string">u'5\u1234 Nowhere, Apt 1'</span>, <span class="string">'Berkeley'</span>, <span class="string">'CA'</span>, <span class="string">'94704'</span>, <span class="string">'USA'</span>)</span><br><span class="line"><span class="comment"># 传递单个值也是可以的</span></span><br><span class="line">j.add(<span class="string">'adr'</span>).value = vobject.vcard.Address(‘A Simple Address‘)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/08/12/Google-spreadsheet-conditional-formatting-one-cell-based-on-another-cell/" rel="prev" title="Google spreadsheet conditional formatting">
+      <i class="fa fa-chevron-left"></i> Google spreadsheet conditional formatting
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/09/%E6%95%99%E8%82%B2%E4%B8%93%E4%BA%AB%E4%BC%98%E6%83%A0%E6%94%B6%E9%9B%86/" rel="next" title="教育优惠收集">
+      教育优惠收集 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-openpyxl-和-vobject-库"><span class="nav-number">1.</span> <span class="nav-text">安装 openpyxl 和 vobject 库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用openpyxl-提取数据"><span class="nav-number">2.</span> <span class="nav-text">使用openpyxl 提取数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#打开并读取-excel-文件-获取所需-sheet："><span class="nav-number">2.1.</span> <span class="nav-text">打开并读取 excel 文件, 获取所需 sheet：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取制定列元素-openpyxl-的语法和-Excel-函数很像："><span class="nav-number">2.2.</span> <span class="nav-text">读取制定列元素.  openpyxl 的语法和 Excel 函数很像：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用-cell-value-获取单元格值"><span class="nav-number">2.3.</span> <span class="nav-text">调用 cell.value 获取单元格值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vcf-文件格式介绍"><span class="nav-number">3.</span> <span class="nav-text">.vcf 文件格式介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用vobject-写入-vcf-文件"><span class="nav-number">4.</span> <span class="nav-text">利用vobject 写入 .vcf 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">5.</span> <span class="nav-text">遇到的问题</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Nujabse"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Nujabse</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nujabse</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

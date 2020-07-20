@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"nujabse.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="根据相关法律政策，这篇文章只是简单的介绍一下如何访问一家不存在的网站。要想获得完美的体验，还是肉身该字符不予显示 什么是hosts文件Wikipedia 上面对hosts 的描述是这样的：  hosts文件是一个用于储存计算机网络中各节点信息的计算机文件。这个文件负责将主机名称映射到相应的IP地址。hosts文件通常用于补充或替换网络中DNS的功能。和DNS不同的是，计算机的用户可以直接对host">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Host 直连教程">
+<meta property="og:url" content="https://nujabse.github.io/2017/01/03/Host-%E7%9B%B4%E8%BF%9E%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Graphophobia">
+<meta property="og:description" content="根据相关法律政策，这篇文章只是简单的介绍一下如何访问一家不存在的网站。要想获得完美的体验，还是肉身该字符不予显示 什么是hosts文件Wikipedia 上面对hosts 的描述是这样的：  hosts文件是一个用于储存计算机网络中各节点信息的计算机文件。这个文件负责将主机名称映射到相应的IP地址。hosts文件通常用于补充或替换网络中DNS的功能。和DNS不同的是，计算机的用户可以直接对host">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/bd120474gw1fbdpvdva4xg20xc0amdy7.gif">
+<meta property="og:image" content="http://oj1ify5rd.bkt.clouddn.com/static/images/hosts-google.png">
+<meta property="og:image" content="http://oj1ify5rd.bkt.clouddn.com/static/images/%E4%B8%AD%E5%9B%BD%E8%81%94%E9%80%9A.png">
+<meta property="og:image" content="http://oj1ify5rd.bkt.clouddn.com/static/images/github-searching.png">
+<meta property="og:image" content="http://oj1ify5rd.bkt.clouddn.com/static/images/google-%E9%95%9C%E5%83%8F.png">
+<meta property="og:image" content="https://media.giphy.com/media/wVi6DBETHNvbi/giphy.gif">
+<meta property="og:image" content="https://camo.githubusercontent.com/d9c1a42e9a3eab3fdcfcfe79c65e3308aa9accc0/68747470733a2f2f692e696d6775722e636f6d2f427757326366742e6a7067">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/bd120474gw1fbf02mkvndj20k70hjdi7.jpg">
+<meta property="article:published_time" content="2017-01-03T03:50:12.000Z">
+<meta property="article:modified_time" content="2020-07-19T15:54:27.802Z">
+<meta property="article:author" content="Nujabse">
+<meta property="article:tag" content="GFW">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/bd120474gw1fbdpvdva4xg20xc0amdy7.gif">
+
+<link rel="canonical" href="https://nujabse.github.io/2017/01/03/Host-%E7%9B%B4%E8%BF%9E%E6%95%99%E7%A8%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Host 直连教程 | Graphophobia</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Graphophobia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://nujabse.github.io/2017/01/03/Host-%E7%9B%B4%E8%BF%9E%E6%95%99%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Nujabse">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Graphophobia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Host 直连教程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-01-03 11:50:12" itemprop="dateCreated datePublished" datetime="2017-01-03T11:50:12+08:00">2017-01-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-19 23:54:27" itemprop="dateModified" datetime="2020-07-19T23:54:27+08:00">2020-07-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/utility/" itemprop="url" rel="index"><span itemprop="name">utility</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="http://ww4.sinaimg.cn/large/bd120474gw1fbdpvdva4xg20xc0amdy7.gif" alt="2017年元旦"><br>根据相关法律政策，这篇文章只是简单的介绍一下如何访问一家不存在的网站。要想获得完美的体验，还是肉身<del>该字符不予显示</del></p>
+<h2 id="什么是hosts文件"><a href="#什么是hosts文件" class="headerlink" title="什么是hosts文件"></a>什么是hosts文件</h2><p>Wikipedia 上面对hosts 的描述是这样的：</p>
+<blockquote>
+<p>hosts文件是一个用于储存计算机网络中各节点信息的计算机文件。这个文件负责将主机名称映射到相应的IP地址。hosts文件通常用于补充或替换网络中DNS的功能。和DNS不同的是，计算机的用户可以直接对hosts文件进行控制。<br>初在Internet的前身ARPANET中，其成员SRI International（英语：SRI International）手动维护并分享了一个名为HOSTS.TXT的文件，其中就包括主机名称和对应地址。1983年DNS系统开始开发，1984年得到了发展。在网络快速的发展过程中，DNS可以自动提供动态的主机名解析。不过在现代操作系统，hosts文件仍然是一个可以作为备用手段的名称解析机制。</p>
+</blockquote>
+<a id="more"></a> 
+<p>可见，hosts文件历史是比较长的。而使用简体中文Google搜索关键词：<em>hosts</em> , 得到的结果首页是：<br><img src="http://oj1ify5rd.bkt.clouddn.com/static/images/hosts-google.png" alt="Google"><br>用简单的话解释hosts文件的如此流行就是：</p>
+<blockquote><p>为了方便用户记忆，我们将IP变成一个个的域名来输入到浏览器进行访问。而这使得访问网站时要先将其域名解析成 IP 。DNS (Domain Name Server) 的作用就是进行 IP 解析，把域名对应到 IP。<br>在 Great FireWall 的 5 种封锁方法中，有一种简单而效果很好的方法是 DNS 污染。GFW 会对 DNS 的解析过程进行干扰，这会使对某些被干扰的域名返回一个错误的 IP 地址给你的主机，使你无法正确连接到你要的服务器上读取正确的信息。<br>Hosts 文件本来是用来提高解析效率。在进行 DNS 请求以前，系统会先检查自己的 Hosts 文件中是否有这个地址映射关系，如果有则调用这个 IP 地址映射，如果没有再向已知的 DNS 服务器提出域名解析。也就是说 Hosts 的请求级别比 DNS 高。当你的 Hosts 文件里面有对应的 IP 时，它就会直接访问那个 IP，而不用通过 DNS。所以，当我们直接将 Google、Twitter、Facebook 之类的 IP 放入 Hosts 文件后，就可以跳过 DNS 的解析这一步，直接就行 IP 访问，不受 GFW 的 DNS 污染干扰了。</p>
+<footer><strong>小C</strong><cite><a href="http://www.mxiaoc.com/147.html" target="_blank" rel="noopener">Google2016最新可用Hosts持续更新</a></cite></footer></blockquote>
+<h2 id="Before-reading-any-further…"><a href="#Before-reading-any-further…" class="headerlink" title="Before reading any further…."></a>Before reading any further….</h2><p>引用Google搜索“hosts”排行最高的 <a href="https://github.com/racaljk/hosts" target="_blank" rel="noopener">github项目</a> wiki里面的一段话：</p>
+<blockquote><p>网络审查在各个国家都普遍存在着，它并不仅存在于中国。在全球的局势对中国都不利的当下，当局会过滤掉影响、危害到中国长远发展的信息，此时国家安全的意义更加重大。</p>
+<p>互联网上存在着大量终究不现实的、不客观的，甚至自相矛盾的抹黑当局政府言论，它们背后一般有西方政府或非政府组织资金支持。这些媒体包括但不限于一些港媒、境外网站。</p>
+<p>我们希望您能在遇到此类言论和见解时，不要不加思考地、情绪一度被煽动而不能克制地、盲目地相信这些片面或者歪曲事实的东西，而是要事实求是地思考，要摆脱情绪绑架的怪诞思维去理解。</p>
+<p>我们需要了解到，中国的发展总基调是“稳中求进”，中国社会的最核心问题就是稳定。失去稳定的中国将会是一盘散沙，面临分裂和肢解的危险。我们希望您了解当今中国发展的根本保证是什么，发展的过程中哪部分是主旋律，哪些是噪音；哪些是进取的，哪些是会开历史倒车的。</p>
+<p>我们应该清醒和全面地认识问题，偏信西方媒体的言论、缺乏对国家的信任是不可取的。您的数据安全和隐私对您尤为重要。若这些信息不应当被西方掌握时，它对国家和民族的命运更为重要。出于此原因，当局可能会限制您的行为，我们不会也无法干预当局的任何政策和决定。</p>
+<p>所以，我们希望您在使用此服务时，不要盲目地攻击当局的做法。</p>
+<footer><strong>hosts</strong><cite><a href="https://github.com/racaljk/hosts" target="_blank" rel="noopener">关于中国的互联网</a></cite></footer></blockquote>
+<h2 id="修改hosts文件访问互联网的安全性"><a href="#修改hosts文件访问互联网的安全性" class="headerlink" title="修改hosts文件访问互联网的安全性"></a>修改hosts文件访问互联网的安全性</h2><p>直接使用他人维护的hosts文件访问互联网是存在一定风险的，而且<strong>并不</strong>具备匿名性，对于ISP都是可见的。例如联通网上营业厅的<a href="http://iservice.10010.com/e4/query/basic/call_phont_record-iframe.html?menuCode=000100030009" target="_blank" rel="noopener">手机上网记录</a> <img src="http://oj1ify5rd.bkt.clouddn.com/static/images/%E4%B8%AD%E5%9B%BD%E8%81%94%E9%80%9A.png"><br>详细的技术分析可以参看知乎上的问答：<a href="https://www.zhihu.com/question/25049587" target="_blank" rel="noopener">修改hosts访问一些难以访问的网络，安全么?</a></p>
+<h2 id="怎样获得有效的hosts文件"><a href="#怎样获得有效的hosts文件" class="headerlink" title="怎样获得有效的hosts文件"></a>怎样获得有效的hosts文件</h2><h3 id="善用搜索"><a href="#善用搜索" class="headerlink" title="善用搜索"></a>善用搜索</h3><p>在github上以“hosts”为关键词搜索<br><img src="http://oj1ify5rd.bkt.clouddn.com/static/images/github-searching.png"><br>对于特殊网络环境用户，可以使用Google <a href="http://google.adwiki.cn/" target="_blank" rel="noopener">镜像网站</a>检索<br><img src="http://oj1ify5rd.bkt.clouddn.com/static/images/google-%E9%95%9C%E5%83%8F.png"></p>
+<h3 id="使用工具自己扫描可用IP"><a href="#使用工具自己扫描可用IP" class="headerlink" title="使用工具自己扫描可用IP"></a>使用工具自己扫描可用IP</h3><p>可以自己造轮子或者使用别人的工具，这里就不展开了</p>
+<h2 id="我已经有耐心看到这了，告诉我该怎么做"><a href="#我已经有耐心看到这了，告诉我该怎么做" class="headerlink" title="我已经有耐心看到这了，告诉我该怎么做"></a>我已经有耐心看到这了，告诉我该怎么做</h2><p><img src="https://media.giphy.com/media/wVi6DBETHNvbi/giphy.gif"></p>
+<h3 id="windows-Mac-linux-桌面用户"><a href="#windows-Mac-linux-桌面用户" class="headerlink" title="windows/Mac/linux 桌面用户"></a>windows/Mac/linux 桌面用户</h3><p>由于hosts文件是一个纯文本文件，所以直接使用Github仓库维护的 <a href="https://raw.githubusercontent.com/racaljk/hosts/master/hosts" target="_blank" rel="noopener">hosts</a> 列表编辑替换系统的hosts文件即可。注意：编辑hosts文件后，访问Google可能需要手工加上https:// 前缀，如<em><a href="https://www.google.com/ncr" target="_blank" rel="noopener">https://www.google.com/ncr</a></em> . 更多问题，请参阅 <a href="https://github.com/racaljk/hosts/wiki/The-hosts-FAQ" target="_blank" rel="noopener">The hosts FAQ</a></p>
+<h4 id="windows-用户（以下步骤参考Github项目hosts）"><a href="#windows-用户（以下步骤参考Github项目hosts）" class="headerlink" title="windows 用户（以下步骤参考Github项目hosts）"></a>windows 用户（以下步骤参考Github项目<a href="https://github.com/racaljk/hosts" target="_blank" rel="noopener">hosts</a>）</h4><p> 使用管理员权限运行文本编辑器（如系统自带的记事本）打开hosts文件，在Windows下的路径为%SystemRoot%\system32\drivers\etc<br> <img src="https://camo.githubusercontent.com/d9c1a42e9a3eab3fdcfcfe79c65e3308aa9accc0/68747470733a2f2f692e696d6775722e636f6d2f427757326366742e6a7067"><br>断开网络重连以刷新dns，使hosts文件生效。<br>搬运youtube上一段演示视频：<br><embed height="415" width="544" quality="high" allowfullscreen="true"
+type="application/x-shockwave-flash" src="//static.hdslb.com/miniloader.swf"
+flashvars="aid=7858227&page=1"
+pluginspage="//www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash"></embed></p>
+<h4 id="Linux用户"><a href="#Linux用户" class="headerlink" title="Linux用户"></a>Linux用户</h4><p>Linux下的hosts文件位置为 /etc/hosts ,需要有管理员权限才能编辑。以使用vim编辑为例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/hosts</span><br></pre></td></tr></table></figure>
+<p>刷新DNS缓存生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart NetworkManager.service</span><br></pre></td></tr></table></figure>
+<h4 id="Mac-用户"><a href="#Mac-用户" class="headerlink" title="Mac 用户"></a>Mac 用户</h4><p>hosts 文件位置也是在 /etc/hosts 下，编辑hosts文件，断开网络重连刷新dns缓存生效。</p>
+<h3 id="android-移动设备用户"><a href="#android-移动设备用户" class="headerlink" title="android 移动设备用户"></a>android 移动设备用户</h3><p>对于已经 root 了的用户，推荐使用 <a href="https://play.google.com/store/apps/details?id=com.lerist.ghosts&hl=zh_CN" target="_blank" rel="noopener">一键 Go Hosts</a><img src="http://ww1.sinaimg.cn/large/bd120474gw1fbf02mkvndj20k70hjdi7.jpg"><br>Google Play 无法访问的可以使用这个 <a href="https://apkpure.com/cn/%E4%B8%80%E9%94%AEgo-hosts/com.lerist.gohosts/download?from=details" target="_blank" rel="noopener">apkpure 的镜像链接</a></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
+<li><a href="https://www.zhihu.com/question/19782572" target="_blank" rel="noopener">修改 hosts 文件的原理是什么？–知乎问答</a></li>
+<li><a href="https://laod.cn/hosts/2016-google-hosts.html" target="_blank" rel="noopener">2016 Google hosts 持续更新【更新于:2017-01-02】</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/GFW/" rel="tag"># GFW</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/12/28/Chrome-group-policy%E8%AE%BE%E7%BD%AE/" rel="prev" title="Chrome group policy设置">
+      <i class="fa fa-chevron-left"></i> Chrome group policy设置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/01/04/spacemacs-%E4%BF%AE%E5%A4%8D%E8%AE%B0/" rel="next" title="spacemacs 修复记">
+      spacemacs 修复记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是hosts文件"><span class="nav-number">1.</span> <span class="nav-text">什么是hosts文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Before-reading-any-further…"><span class="nav-number">2.</span> <span class="nav-text">Before reading any further….</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改hosts文件访问互联网的安全性"><span class="nav-number">3.</span> <span class="nav-text">修改hosts文件访问互联网的安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎样获得有效的hosts文件"><span class="nav-number">4.</span> <span class="nav-text">怎样获得有效的hosts文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#善用搜索"><span class="nav-number">4.1.</span> <span class="nav-text">善用搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用工具自己扫描可用IP"><span class="nav-number">4.2.</span> <span class="nav-text">使用工具自己扫描可用IP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我已经有耐心看到这了，告诉我该怎么做"><span class="nav-number">5.</span> <span class="nav-text">我已经有耐心看到这了，告诉我该怎么做</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows-Mac-linux-桌面用户"><span class="nav-number">5.1.</span> <span class="nav-text">windows&#x2F;Mac&#x2F;linux 桌面用户</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#windows-用户（以下步骤参考Github项目hosts）"><span class="nav-number">5.1.1.</span> <span class="nav-text">windows 用户（以下步骤参考Github项目hosts）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux用户"><span class="nav-number">5.1.2.</span> <span class="nav-text">Linux用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mac-用户"><span class="nav-number">5.1.3.</span> <span class="nav-text">Mac 用户</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#android-移动设备用户"><span class="nav-number">5.2.</span> <span class="nav-text">android 移动设备用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">6.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Nujabse"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Nujabse</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nujabse</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
